@@ -2,7 +2,6 @@ package net.unicon.cas.addons.response;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.jasig.cas.authentication.Authentication;

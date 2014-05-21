@@ -1,12 +1,23 @@
 package net.unicon.cas.addons.serviceregistry;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import net.unicon.cas.addons.support.GuardedBy;
 import net.unicon.cas.addons.support.ResourceChangeDetectingEventNotifier;
 import net.unicon.cas.addons.support.ThreadSafe;
 
-import org.jasig.cas.services.*;
+import org.jasig.cas.services.InMemoryServiceRegistryDaoImpl;
+import org.jasig.cas.services.RegisteredService;
+import org.jasig.cas.services.ReloadableServicesManager;
+import org.jasig.cas.services.ServiceRegistryDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -17,16 +28,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Implementation of <code>ServiceRegistryDao</code> that reads services definition from JSON configuration file at the Spring Application Context

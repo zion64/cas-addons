@@ -1,16 +1,14 @@
 package net.unicon.cas.addons.response;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.jasig.cas.authentication.Authentication;
-import org.jasig.cas.authentication.principal.Principal;
-import org.jasig.cas.web.view.AbstractCasView;
-import org.springframework.web.servlet.view.AbstractView;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.springframework.web.servlet.view.AbstractView;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**

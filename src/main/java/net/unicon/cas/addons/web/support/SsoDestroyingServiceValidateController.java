@@ -1,10 +1,12 @@
 package net.unicon.cas.addons.web.support;
 
-import net.unicon.cas.addons.authentication.support.Assertions;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import net.unicon.cas.addons.serviceregistry.RegisteredServiceWithAttributes;
 import net.unicon.cas.addons.serviceregistry.services.RegisteredServicesPolicies;
+
 import org.jasig.cas.CentralAuthenticationService;
-import org.jasig.cas.authentication.principal.Service;
 import org.jasig.cas.authentication.principal.WebApplicationService;
 import org.jasig.cas.services.ServicesManager;
 import org.jasig.cas.ticket.Ticket;
@@ -13,13 +15,9 @@ import org.jasig.cas.ticket.registry.TicketRegistry;
 import org.jasig.cas.validation.Assertion;
 import org.jasig.cas.web.ServiceValidateController;
 import org.jasig.cas.web.support.ArgumentExtractor;
-import org.jasig.cas.web.support.WebUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * An extention of a <code>ServiceValidateController</code> that destroys server-side TGT upon successful Service Ticket validation.

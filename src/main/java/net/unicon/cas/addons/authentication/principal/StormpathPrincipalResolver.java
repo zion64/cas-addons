@@ -1,15 +1,16 @@
 package net.unicon.cas.addons.authentication.principal;
 
-import com.stormpath.sdk.account.Account;
-import com.stormpath.sdk.resource.ResourceException;
 import net.unicon.cas.addons.authentication.handler.StormpathAuthenticationHandler;
 import net.unicon.cas.addons.support.ThreadSafe;
+
 import org.jasig.cas.authentication.principal.Credentials;
 import org.jasig.cas.authentication.principal.CredentialsToPrincipalResolver;
 import org.jasig.cas.authentication.principal.Principal;
 import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.stormpath.sdk.account.Account;
 
 /**
  * An implementation of {@link org.jasig.cas.authentication.principal.CredentialsToPrincipalResolver}

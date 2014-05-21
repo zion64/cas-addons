@@ -1,8 +1,8 @@
 package net.unicon.cas.addons.info.events.listeners;
 
 import net.unicon.cas.addons.info.events.CasServiceTicketValidatedEvent;
-import net.unicon.cas.addons.info.events.CasSsoSessionEstablishedEvent;
 import net.unicon.cas.addons.support.ThreadSafe;
+
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

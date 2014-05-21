@@ -318,7 +318,7 @@ public class CasNamespaceHandler extends NamespaceHandlerSupport {
     /**
      * Parses <pre>service-authorization-action</pre> elements into bean definitions of type {@link net.unicon.cas.addons.serviceregistry.services.authorization.ServiceAuthorizationAction}
      */
-    @SuppressWarnings("unchecked")
+//    @SuppressWarnings("unchecked")
     private static class ServiceAuthorizationActionBeanDefinitionParser extends AbstractBeanDefinitionParser {
 
         @Override

@@ -1,16 +1,19 @@
 package net.unicon.cas.addons.persondir;
 
-import edu.internet2.middleware.grouperClient.api.GcGetGroups;
-import edu.internet2.middleware.grouperClient.ws.beans.WsGetGroupsResult;
-import edu.internet2.middleware.grouperClient.ws.beans.WsGroup;
-import org.jasig.services.persondir.IPersonAttributeDao;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.jasig.services.persondir.IPersonAttributes;
-import org.jasig.services.persondir.support.AbstractDefaultAttributePersonAttributeDao;
-import org.jasig.services.persondir.support.AbstractFlatteningPersonAttributeDao;
 import org.jasig.services.persondir.support.AttributeNamedPersonImpl;
 import org.jasig.services.persondir.support.BasePersonAttributeDao;
 
-import java.util.*;
+import edu.internet2.middleware.grouperClient.api.GcGetGroups;
+import edu.internet2.middleware.grouperClient.ws.beans.WsGetGroupsResult;
+import edu.internet2.middleware.grouperClient.ws.beans.WsGroup;
 
 /**
  * Class implementing a minimal <code>IPersonAttributeDao</code> API only used by CAS which simply reads all the groups from Grouper repository
