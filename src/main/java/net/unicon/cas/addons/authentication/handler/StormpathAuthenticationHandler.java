@@ -1,16 +1,24 @@
 package net.unicon.cas.addons.authentication.handler;
 
+import java.security.GeneralSecurityException;
+
 import com.stormpath.sdk.account.Account;
 import com.stormpath.sdk.application.Application;
 import com.stormpath.sdk.authc.UsernamePasswordRequest;
 import com.stormpath.sdk.client.Client;
 import com.stormpath.sdk.client.DefaultApiKey;
 import com.stormpath.sdk.resource.ResourceException;
+
 import net.unicon.cas.addons.support.Immutable;
+
+import org.jasig.cas.authentication.HandlerResult;
+import org.jasig.cas.authentication.PreventedException;
+import org.jasig.cas.authentication.UsernamePasswordCredential;
 import org.jasig.cas.authentication.handler.AuthenticationException;
 import org.jasig.cas.authentication.handler.BadCredentialsAuthenticationException;
 import org.jasig.cas.authentication.handler.support.AbstractUsernamePasswordAuthenticationHandler;
-import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
+//import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
+import org.jasig.cas.authentication.UsernamePasswordCredential;
 import org.springframework.beans.factory.BeanCreationException;
 
 
@@ -67,4 +75,11 @@ public class StormpathAuthenticationHandler extends AbstractUsernamePasswordAuth
     public Account authenticateAccount(final UsernamePasswordCredentials credentials) throws ResourceException {
         return this.application.authenticateAccount(new UsernamePasswordRequest(credentials.getUsername(), credentials.getPassword())).getAccount();
     }
+
+	@Override
+	protected HandlerResult authenticateUsernamePasswordInternal(UsernamePasswordCredential transformedCredential)
+			throws GeneralSecurityException, PreventedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
