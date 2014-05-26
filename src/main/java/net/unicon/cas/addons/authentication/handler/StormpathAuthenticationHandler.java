@@ -2,6 +2,8 @@ package net.unicon.cas.addons.authentication.handler;
 
 import java.security.GeneralSecurityException;
 
+import javax.security.auth.login.FailedLoginException;
+
 import com.stormpath.sdk.account.Account;
 import com.stormpath.sdk.application.Application;
 import com.stormpath.sdk.authc.UsernamePasswordRequest;
@@ -17,7 +19,7 @@ import org.jasig.cas.authentication.UsernamePasswordCredential;
 import org.jasig.cas.authentication.handler.AuthenticationException;
 import org.jasig.cas.authentication.handler.BadCredentialsAuthenticationException;
 import org.jasig.cas.authentication.handler.support.AbstractUsernamePasswordAuthenticationHandler;
-//import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
+import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
 import org.jasig.cas.authentication.UsernamePasswordCredential;
 import org.springframework.beans.factory.BeanCreationException;
 
@@ -58,16 +60,16 @@ public class StormpathAuthenticationHandler extends AbstractUsernamePasswordAuth
 		}
 	}
 
-	@Override
+//	@Override
 	protected boolean authenticateUsernamePasswordInternal(final UsernamePasswordCredentials credentials) throws AuthenticationException {
 		try {
-			this.log.debug("Attempting to authenticate user [{}] against application [{}] in Stormpath cloud...", credentials.getUsername(), this.application.getName());
+			this.logger.debug("Attempting to authenticate user [{}] against application [{}] in Stormpath cloud...", credentials.getUsername(), this.application.getName());
 			this.authenticateAccount(credentials);
-			this.log.debug("Successfully authenticated user [{}]", credentials.getUsername());
+			this.logger.debug("Successfully authenticated user [{}]", credentials.getUsername());
 			return true;
 		}
 		catch (ResourceException e) {
-			this.log.error(e.getMessage(), e);
+			this.logger.error(e.getMessage(), e);
 			throw new BadCredentialsAuthenticationException();
 		}
 	}
@@ -76,10 +78,23 @@ public class StormpathAuthenticationHandler extends AbstractUsernamePasswordAuth
         return this.application.authenticateAccount(new UsernamePasswordRequest(credentials.getUsername(), credentials.getPassword())).getAccount();
     }
 
+    public Account authenticateAccount(final UsernamePasswordCredential credential) throws ResourceException {
+        return this.application.authenticateAccount(new UsernamePasswordRequest(credential.getUsername(), credential.getPassword())).getAccount();
+    }
+    
+    
 	@Override
 	protected HandlerResult authenticateUsernamePasswordInternal(UsernamePasswordCredential transformedCredential)
 			throws GeneralSecurityException, PreventedException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			this.logger.debug("Attempting to authenticate user [{}] against application [{}] in Stormpath cloud...", transformedCredential.getUsername(), this.application.getName());
+			this.authenticateAccount(transformedCredential);
+			this.logger.debug("Successfully authenticated user [{}]", transformedCredential.getUsername());
+			return null;
+		}
+		catch (ResourceException e) {
+			this.logger.error(e.getMessage(), e);
+			throw new FailedLoginException();
+		}
 	}
 }

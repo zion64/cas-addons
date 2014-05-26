@@ -3,8 +3,8 @@ package net.unicon.cas.addons.authentication.principal;
 import net.unicon.cas.addons.authentication.principal.util.PrincipalUtils;
 
 import org.apache.commons.lang.StringUtils;
-import org.jasig.cas.authentication.principal.AbstractPersonDirectoryCredentialsToPrincipalResolver;
 import org.jasig.cas.authentication.principal.Credentials;
+import org.jasig.cas.authentication.principal.PersonDirectoryPrincipalResolver;
 import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
 
 /**
@@ -16,20 +16,19 @@ import org.jasig.cas.authentication.principal.UsernamePasswordCredentials;
  * @author Unicon, inc.
  * @since 0.6
  */
-public class EmailAddressPasswordCredentialsToPrincipalResolver extends AbstractPersonDirectoryCredentialsToPrincipalResolver {
+@SuppressWarnings("deprecation")
+public class EmailAddressPasswordCredentialsToPrincipalResolver extends PersonDirectoryPrincipalResolver {
 
-    @Override
-    public boolean supports(final Credentials credentials) {
-        return credentials != null && UsernamePasswordCredentials.class.isAssignableFrom(credentials.getClass());
+    public boolean supports(final Credentials credential) {
+        return credential != null && UsernamePasswordCredentials.class.isAssignableFrom(credential.getClass());
     }
 
-    @Override
-    protected String extractPrincipalId(final Credentials credentials) {
-        if (credentials == null) {
+    protected String extractPrincipalId(final Credentials credential) {
+        if (credential == null) {
             return null;
 		}
 
-        final UsernamePasswordCredentials usernamePasswordCredentials = (UsernamePasswordCredentials) credentials;
+        final UsernamePasswordCredentials usernamePasswordCredentials = (UsernamePasswordCredentials) credential;
 
         if (StringUtils.isBlank(usernamePasswordCredentials.getUsername())) {
             return null;
