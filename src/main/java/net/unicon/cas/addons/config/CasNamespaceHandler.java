@@ -1,6 +1,7 @@
 package net.unicon.cas.addons.config;
 
 import com.github.inspektr.audit.support.Slf4jLoggingAuditTrailManager;
+
 import net.unicon.cas.addons.authentication.handler.StormpathAuthenticationHandler;
 import net.unicon.cas.addons.authentication.internal.DefaultAuthenticationSupport;
 import net.unicon.cas.addons.authentication.principal.StormpathPrincipalResolver;
@@ -16,21 +17,23 @@ import net.unicon.cas.addons.serviceregistry.services.authorization.DefaultRegis
 import net.unicon.cas.addons.serviceregistry.services.authorization.ServiceAuthorizationAction;
 import net.unicon.cas.addons.serviceregistry.services.internal.DefaultRegisteredServicesPolicies;
 import net.unicon.cas.addons.support.ResourceChangeDetectingEventNotifier;
-
 import net.unicon.cas.addons.support.TimingAspectRemovingBeanFactoryPostProcessor;
 import net.unicon.cas.addons.ticket.registry.HazelcastTicketRegistry;
 import net.unicon.cas.addons.web.flow.ServiceRedirectionAction;
 import net.unicon.cas.addons.web.view.RequestParameterCasLoginViewSelector;
-import org.jasig.cas.adaptors.generic.AcceptUsersAuthenticationHandler;
-import org.jasig.cas.adaptors.ldap.BindLdapAuthenticationHandler;
-import org.jasig.cas.authentication.AuthenticationManagerImpl;
+
+
+//import org.jasig.cas.adaptors.generic.AcceptUsersAuthenticationHandler;
+//import org.jasig.cas.adaptors.ldap.BindLdapAuthenticationHandler;
+import org.jasig.cas.authentication.AcceptUsersAuthenticationHandler;
+import org.jasig.cas.authentication.LdapAuthenticationHandler;
+//import org.jasig.cas.authentication.AuthenticationManagerImpl;
 import org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler;
 import org.jasig.cas.authentication.handler.support.SimpleTestUsernamePasswordAuthenticationHandler;
-import org.jasig.cas.authentication.principal.HttpBasedServiceCredentialsToPrincipalResolver;
-import org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver;
+//import org.jasig.cas.authentication.principal.HttpBasedServiceCredentialsToPrincipalResolver;
+//import org.jasig.cas.authentication.principal.UsernamePasswordCredentialsToPrincipalResolver;
 import org.jasig.cas.monitor.HealthCheckMonitor;
 import org.jasig.cas.monitor.MemoryMonitor;
-
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.*;
@@ -434,7 +437,8 @@ public class CasNamespaceHandler extends NamespaceHandlerSupport {
 
         @Override
         protected Class<?> getBeanClass(Element element) {
-            return BindLdapAuthenticationHandler.class;
+//            return BindLdapAuthenticationHandler.class;
+            return LdapAuthenticationHandler.class;
         }
 
         @Override
@@ -460,7 +464,7 @@ public class CasNamespaceHandler extends NamespaceHandlerSupport {
         @SuppressWarnings("unchecked")
         protected AbstractBeanDefinition createAuthenticatonManagerBeanDefinition(Element element, ParserContext parserContext, BeanDefinitionBuilder authenticationManagerBuilder, ManagedList authenticationHandlersList) {
             BeanDefinitionBuilder contextSourceBuilder = BeanDefinitionBuilder.genericBeanDefinition(LdapContextSource.class);
-            BeanDefinitionBuilder bindLdapAuthnHandlerBuilder = BeanDefinitionBuilder.genericBeanDefinition(BindLdapAuthenticationHandler.class);
+            BeanDefinitionBuilder bindLdapAuthnHandlerBuilder = BeanDefinitionBuilder.genericBeanDefinition(LdapAuthenticationHandler.class);
             parseBindLdapAuthenticationHandlerBeanDefinition(element, contextSourceBuilder, bindLdapAuthnHandlerBuilder, parserContext.getRegistry());
             authenticationHandlersList.add(bindLdapAuthnHandlerBuilder.getBeanDefinition());
             return authenticationManagerBuilder.getBeanDefinition();

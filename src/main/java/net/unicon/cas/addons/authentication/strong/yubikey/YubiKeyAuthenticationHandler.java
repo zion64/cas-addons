@@ -1,8 +1,14 @@
 package net.unicon.cas.addons.authentication.strong.yubikey;
 
+import java.security.GeneralSecurityException;
+
 import com.yubico.client.v2.YubicoClient;
 import com.yubico.client.v2.YubicoResponse;
 import com.yubico.client.v2.YubicoResponseStatus;
+
+import org.jasig.cas.authentication.HandlerResult;
+import org.jasig.cas.authentication.PreventedException;
+import org.jasig.cas.authentication.UsernamePasswordCredential;
 import org.jasig.cas.authentication.handler.AuthenticationException;
 import org.jasig.cas.authentication.handler.BadUsernameOrPasswordAuthenticationException;
 import org.jasig.cas.authentication.handler.support.AbstractUsernamePasswordAuthenticationHandler;
@@ -125,4 +131,12 @@ public class YubiKeyAuthenticationHandler extends AbstractUsernamePasswordAuthen
             return true;
         }
     }
+
+	@Override
+	protected HandlerResult authenticateUsernamePasswordInternal(
+			UsernamePasswordCredential transformedCredential)
+			throws GeneralSecurityException, PreventedException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
